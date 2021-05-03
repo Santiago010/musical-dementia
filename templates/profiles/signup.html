@@ -1,0 +1,20 @@
+{% extends 'struct.html' %} {% block head_content %}
+<title>Signup User</title>
+{% endblock head_content %} {% block container_principal %}
+<p>{{error}}</p>
+<form action="{% url 'signup_user' %}" method="POST">
+  {% csrf_token %}
+  <input type="text" placeholder="nombre" name="first_name" required />
+  <input type="text" placeholder="apellido" name="last_name" required />
+  <input type="text" placeholder="nombre de usuario" name="username" required />
+  <input type="password" placeholder="contraseña" name="password" required />
+  <input
+    type="password"
+    placeholder="contraseña"
+    name="password_confirmation"
+    required
+  />
+  <input type="email" name="email" placeholder="correo" />
+  <input type="submit" value="Crear cuenta" />
+</form>
+{% endblock container_principal %}
