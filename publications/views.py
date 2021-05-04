@@ -3,6 +3,7 @@
 # Django
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -31,5 +32,6 @@ publications = [
     }
 ]
 
+@login_required
 def view_publications(request):
     return render(request,'publications/list.html',{'publications':publications})

@@ -6,18 +6,18 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 # Models
 from django.contrib.auth.models import User
-from profiles.models import Profiles
+from profiles.models import Profile
 
 #Register your models here.
 
-@admin.register(Profiles)
+@admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user','interest')
 
 class ProfileInline(admin.StackedInline):
-    model = Profiles
+    model = Profile
     can_delete = False
-    verbose_name_plural = 'Profiles'
+    verbose_name_plural = 'Profile'
 
 class UserAdmin(BaseUserAdmin):
     inlines = (ProfileInline,)

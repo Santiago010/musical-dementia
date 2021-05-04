@@ -29,5 +29,6 @@ urlpatterns = [
     path('',views_publications.view_publications,name='publications'),
     path('users/login/',views_profiles.login_user, name="login_user"),
     path('users/logout/',views_profiles.logout_view,name="logout_user"),
-    path('users/signup/',views_profiles.signup_view,name='signup_user')
+    path('users/signup/',views_profiles.signup_view,name='signup_user'),
+    path('users/update/',views_profiles.update_profile,name="update_user")
 ]
