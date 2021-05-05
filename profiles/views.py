@@ -97,8 +97,13 @@ def update_profile(request):
         data_form = UpdateDataForm(request.POST,request.FILES)
         if data_form.is_valid():
             new_data = data_form.cleaned_data
-            query_profile = Profile.objects.filter(id=current_profile.id)
-            print(query_profile)
+            query_profile = Profile.objects.get(id=current_profile.id)
+            query_profile.photo = new_data['photo']
+            query_profile.interest = new_data['interest']
+            query_profile.phone_number = new_data['phone_number']
+            query_profile.save()
+            # pdb.set_trace()
+            return redirect('publications')
 
 
     else : 

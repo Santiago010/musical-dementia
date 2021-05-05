@@ -1,7 +1,7 @@
 
 # Archivo de la base de datos de produccion
-.db.sqlite3
+db.sqlite3
 # Archivo de datos de prueba
-.user
+user
 
 /media

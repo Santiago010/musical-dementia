@@ -1,12 +1,46 @@
 {% extends 'struct.html' %} {% block head_content %}
-<title>update user {{request.user.username}}</title>
-{% endblock head_content %} {% block container_principal %}
-<form
-  action=" {% url 'update_user' %} "
-  method="POST"
-  enctype="multipart/form-data"
->
-  {% csrf_token %} {{form}}
-  <input type="submit" value="Actualizar" />
-</form>
-{% endblock container_principal %}
+<title>update profile: @{{request.user.username}}</title>
+{% endblock head_content %} {% block body_content %} {% load static %}
+<div class="container">
+  <div class="container__principal">
+    <img
+      width="250"
+      src=" {% static 'images/update.svg' %} "
+      alt=""
+      class="container__principal__image"
+    />
+    <p class="container__principal__paragraph">
+      ¡Genial Creaste una cuenta! <br />
+      ahora actualiza tu perfil con los datos mas importantes
+    </p>
+  </div>
+  <form
+    action=" {% url 'update_user' %} "
+    method="POST"
+    class="container__form"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="container__form__input-image">
+      <input type="file" name="photo" />
+    </div>
+    <input
+      class="container__form__input"
+      type="number"
+      placeholder="numero de telefono:"
+      name="phone_number"
+    />
+    <textarea
+      class="container__form__textarea"
+      name="interest"
+      placeholder="Escribe aca tus intereses musicales"
+      rows="5"
+    ></textarea>
+    <input
+      class="container__form__input container__form__input--submit"
+      type="submit"
+      value="Ingresar"
+    />
+  </form>
+</div>
+{% endblock body_content %}

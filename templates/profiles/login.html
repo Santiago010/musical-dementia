@@ -1,11 +1,44 @@
 {% extends 'struct.html' %} {% block head_content %}
 <title>Login User</title>
-{% endblock head_content %} {% block container_principal %}
-<p>{{error}}</p>
-<form action="{% url 'login_user' %}" method="POST">
-  {% csrf_token %}
-  <input name="username" placeholder="username" type="text" required />
-  <input type="password" name="password" placeholder="password" required />
-  <input type="submit" value="Signup" />
-</form>
-{% endblock container_principal %}
+{% endblock head_content %} {% block body_content %} {% load static %}
+<div class="container">
+  <div class="container__principal">
+    <img
+      width="250"
+      src="{% static 'images/login-signup.svg' %} "
+      alt=""
+      class="container__principal__image"
+    />
+    <p class="container__principal__paragraph">
+      Ingresa a tu cuenta <br />
+      y comienza un viaje fascinante buscando tu musica favorita
+    </p>
+  </div>
+  <form method="POST" action=" {% url 'login_user' %} " class="container__form">
+    {% csrf_token %}
+    <input
+      class="container__form__input"
+      type="text"
+      placeholder="nombre de usuario"
+      name="username"
+    />
+    <input
+      class="container__form__input"
+      type="password"
+      name="password"
+      placeholder="contraseña"
+    />
+    <input
+      class="container__form__input container__form__input--submit"
+      type="submit"
+      value="Ingresar"
+    />
+  </form>
+  <p class="container__pararaph-link">
+    ¡no tienes una cuenta! crea una dando click en el boton de play
+  </p>
+  <a class="container__link" href=" {% url 'signup_user' %} "
+    ><i class="fas fa-play"></i
+  ></a>
+</div>
+{% endblock body_content %}

@@ -25,4 +25,4 @@ class Simple_Middleware:
         response = self.get_response(request)
 
 
-        return response
+        return response 
