@@ -1,4 +1,4 @@
-{% extends 'struct.html' %} {% block head_content %}
+{% extends 'profiles/struct.html' %} {% block head_content %}
 <title>Login User</title>
 {% endblock head_content %} {% block body_content %} {% load static %}
 <div class="container">
@@ -21,12 +21,14 @@
       type="text"
       placeholder="nombre de usuario"
       name="username"
+      required
     />
     <input
       class="container__form__input"
       type="password"
       name="password"
       placeholder="contraseña"
+      required
     />
     <input
       class="container__form__input container__form__input--submit"
@@ -34,6 +36,12 @@
       value="Ingresar"
     />
   </form>
+  <div class="container-errors">
+    {% if error %}
+    <p>{{error}}</p>
+    {% endif %}
+  </div>
+
   <p class="container__pararaph-link">
     ¡no tienes una cuenta! crea una dando click en el boton de play
   </p>

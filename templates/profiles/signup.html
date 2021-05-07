@@ -1,4 +1,4 @@
-{% extends 'struct.html' %} {% block head_content %}
+{% extends 'profiles/struct.html' %} {% block head_content %}
 <title>Sign-up User</title>
 {% endblock head_content %} {% block body_content %} {% load static %}
 <div class="container">
@@ -16,46 +16,86 @@
   </div>
   <form method="POST" action="{% url 'signup_user' %} " class="container__form">
     {% csrf_token %}
-    <input
-      class="container__form__input"
-      type="text"
-      placeholder="nombre de usuario"
-      name="username"
-    />
-
-    <input
-      class="container__form__input"
-      type="email"
-      name="email"
-      placeholder="correo"
-    />
-    <input
-      class="container__form__input"
-      type="password"
-      name="password"
-      placeholder="contraseña"
-    />
+    <div>
+      <input
+        class="container__form__input"
+        type="text"
+        placeholder="nombre de usuario"
+        name="username"
+        required
+        minlength="3"
+        maxlength="40"
+      />
+      <div class="container-errors">
+        {% for error in form.username.errors %} {{error}} {% endfor %}
+      </div>
+    </div>
+    <div>
+      <input
+        class="container__form__input"
+        type="email"
+        name="email"
+        placeholder="correo"
+        required
+        minlength="13"
+      />
+      <div class="container-errors">
+        {% for error in form.email.errors %} {{error}} {% endfor %}
+      </div>
+    </div>
+    <div>
+      <input
+        class="container__form__input"
+        type="password"
+        name="password"
+        placeholder="contraseña"
+        minlength="8"
+        required
+      />
+      <div class="container-errors">
+        {% for error in form.password.errors %} {{error}} {% endfor %}
+      </div>
+    </div>
     <input
       class="container__form__input"
       type="password"
       name="password_confirmation"
       placeholder="confirma tu contraseña"
+      minlength="8"
+      required
     />
-    <input
-      class="container__form__input"
-      type="text"
-      name="first_name"
-      placeholder="nombre"
-    />
-    <input
-      class="container__form__input"
-      type="text"
-      name="last_name"
-      placeholder="apellido"
-    />
+    <div>
+      <input
+        class="container__form__input"
+        type="text"
+        name="first_name"
+        placeholder="nombre"
+        minlength="3"
+        maxlength="40"
+        required
+      />
+      <div class="container-errors">
+        {% for error in form.first_name.errors %} {{error}} {% endfor %}
+      </div>
+    </div>
+    <div>
+      <input
+        class="container__form__input"
+        type="text"
+        name="last_name"
+        placeholder="apellido"
+        minlength="3"
+        maxlength="40"
+        required
+      />
+      <div class="container-errors">
+        {% for error in form.last_name.errors %} {{error}} {% endfor %}
+      </div>
+    </div>
     <input
       class="container__form__input container__form__input--submit"
       type="submit"
+      required
       value="Crear Cuenta"
     />
   </form>

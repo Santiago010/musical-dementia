@@ -1,4 +1,4 @@
-{% extends 'struct.html' %} {% block head_content %}
+{% extends 'profiles/struct.html' %} {% block head_content %}
 <title>update profile: @{{request.user.username}}</title>
 {% endblock head_content %} {% block body_content %} {% load static %}
 <div class="container">
@@ -22,20 +22,38 @@
   >
     {% csrf_token %}
     <div class="container__form__input-image">
-      <input type="file" name="photo" />
+      <input type="file" name="photo" required />
     </div>
-    <input
-      class="container__form__input"
-      type="number"
-      placeholder="numero de telefono:"
-      name="phone_number"
-    />
-    <textarea
-      class="container__form__textarea"
-      name="interest"
-      placeholder="Escribe aca tus intereses musicales"
-      rows="5"
-    ></textarea>
+    <div>
+      <input
+        class="container__form__input"
+        type="number"
+        placeholder="numero de telefono:"
+        name="phone_number"
+        required
+        minlength="7"
+        value="{% if form.errors %}{{form.phone_number.value}}{% endif %}"
+      />
+      <div class="container-errors">
+        {% for error in form.phone_number.errors %} {{error}} {% endfor %}
+      </div>
+    </div>
+    <div>
+      <textarea
+        class="container__form__textarea"
+        name="interest"
+        placeholder="Escribe aca tus intereses musicales"
+        rows="5"
+        required
+        minlength="10"
+        maxlength="255"
+      >
+{% if form.errors %}{{form.interest.value}}{% endif %}</textarea
+      >
+      <div class="container-errors">
+        {% for error in form.interest.errors %} {{error}} {% endfor %}
+      </div>
+    </div>
     <input
       class="container__form__input container__form__input--submit"
       type="submit"

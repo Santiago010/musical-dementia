@@ -5,12 +5,13 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
+from django.forms import ValidationError
 
 # Utilities
 import pdb
 
 # Form
-from profiles.forms import UpdateDataForm
+from profiles.forms import UpdateDataForm, SignupForm
 
 # Models
 from django.contrib.auth.models import User
@@ -21,8 +22,6 @@ from profiles.models import Profile
 
 
 def login_user(request):
-
-    # pdb.set_trace()
     if request.method == 'POST':
         data_user = {
             'username' : request.POST['username'],
@@ -45,7 +44,7 @@ def login_user(request):
             return render(
                 request=request,
                 template_name='profiles/login.html',
-                context={'error':'usuario invalido'}
+                context={'error':'Nombre de usuario o contraseña incorrectos.'}
             )
     
     return render(
@@ -61,38 +60,28 @@ def logout_view(request):
 
 
 def signup_view(request):
-
     if request.method == 'POST':
-        data_user = {
-            'first_name' : request.POST['first_name'],
-            'last_name' : request.POST['last_name'],
-            'username' : request.POST['username'],
-            'password' : request.POST['password'],
-            'password_confirmation' : request.POST['password_confirmation'],
-            'email' : request.POST['email']
+        form_signup = SignupForm(request.POST)
 
-        }
-        
-        if data_user['password'] != data_user['password_confirmation']:
-            return render(request=request,template_name='profiles/signup.html',context={'error':'las contraseñas no conciden'})
-        
-        data_user.pop('password_confirmation')
-        new_user = User.objects.create_user(**data_user)
-        new_profile = Profile(user=new_user)
-        new_profile.save()
-        return redirect('login_user')
+        if form_signup.is_valid():
+            form_signup.save()
+            return redirect('login_user')
+        else:
+            form_signup.add_error('password',ValidationError("La contraseña de confirmacion no concide."))
+
+    else :
+        form_signup = SignupForm()
 
     return render(
         request=request,
-        template_name='profiles/signup.html'
+        template_name='profiles/signup.html',
+        context={'form': form_signup}
     )
     
 @login_required
 def update_profile(request):
     current_profile = request.user.profile
     
-
-    # print(current_profile.id)
     if request.method == 'POST':
         data_form = UpdateDataForm(request.POST,request.FILES)
         if data_form.is_valid():
@@ -102,7 +91,6 @@ def update_profile(request):
             query_profile.interest = new_data['interest']
             query_profile.phone_number = new_data['phone_number']
             query_profile.save()
-            # pdb.set_trace()
             return redirect('publications')
 
 

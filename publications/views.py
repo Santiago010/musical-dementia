@@ -1,37 +1,51 @@
 """views publications"""
 
 # Django
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.forms import ValidationError
+
+# Utilities
+import pdb
+
+# Form
+from publications.form import NewPublicationForm
+
+# Models
+from publications.models import Publication
 
 # Create your views here.
 
-publications = [
-    {
-        'user' : {
-            'photo' : 'https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ',
-            'username': 'santiago18',
-        },
-        'publication' : {
-            'picture' : 'https://i.picsum.photos/id/1054/3079/1733.jpg?hmac=Rk5_Xt3oLlDLJHH3ZDyHCqua0s45mhNjXmID277ZOMI',
-            'info' : ['info1','info2','info3','info4'],
-            'description' : 'Esta es una imagen de unos apartamentos hechos mierda'
-        }
-    },
-        {
-        'user' : {
-            'photo' : 'https://i.picsum.photos/id/1083/5472/3648.jpg?hmac=CtOxgXc6Oe3TQvKBXtPsKVT9Z2Yg7SJKWVlgWPeMBUs',
-            'username': 'Maria7',
-        },
-        'publication' : {
-            'picture' : 'https://i.picsum.photos/id/1074/5472/3648.jpg?hmac=w-Fbv9bl0KpEUgZugbsiGk3Y2-LGAuiLZOYsRk0zo4A',
-            'info' : ['info1','info2','info3','info4'],
-            'description' : 'Esta es la imagen de un hermoso leon'
-        }
-    }
-]
 
 @login_required
 def view_publications(request):
-    return render(request,'publications/list.html',{'publications':publications})
+    list_publications = Publication.objects.all()
+    # pdb.set_trace()
+    return render(
+        request=request,
+        template_name='publications/list.html',
+        context={'publications': list_publications}
+    )
+
+@login_required
+def view_new_publications(request):
+
+    if request.method == 'POST':
+        form_new_publications = NewPublicationForm(request.POST,request.FILES)
+
+        if form_new_publications.is_valid():
+            form_new_publications.save()
+            return redirect('publications')
+
+    else:
+        form_new_publications = NewPublicationForm()
+
+
+    return render(
+        request=request,
+        template_name='publications/new.html',
+        context={
+            'form': form_new_publications
+        }
+    )

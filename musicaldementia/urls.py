@@ -27,6 +27,7 @@ from profiles import views as views_profiles
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views_publications.view_publications,name='publications'),
+    path('/new',views_publications.view_new_publications,name='new_publications'),
     path('users/login/',views_profiles.login_user, name="login_user"),
     path('users/logout/',views_profiles.logout_view,name="logout_user"),
     path('users/signup/',views_profiles.signup_view,name='signup_user'),

@@ -1,0 +1,59 @@
+{% extends 'publications/struct.html' %} {% block head_content %}
+<title>New Plublications</title>
+{% endblock head_content %} {% block body_content %}
+<div>
+  <form
+    action=" {% url 'new_publications' %} "
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <input type="hidden" name="user" value="{{request.user}}" />
+    <input type="hidden" name="profile" value="{{request.user.profile}}" />
+    <div>
+      <label for="image_front">Imagen de la portada</label>
+      <input type="file" name="image_front" alt="" />
+    </div>
+    <div>
+      <label for="image_back">Imagen de la contraportada</label>
+      <input type="file" name="image_back" alt="" />
+    </div>
+    <textarea
+      name="description"
+      id=""
+      placeholder="descripcion"
+      cols="30"
+      rows="10"
+    ></textarea>
+    <div>
+      <label for="tag_musical_genre">Genero musical: </label>
+      <select name="tag_musical_genre" id="">
+        <option value="Jazz">Jazz</option>
+        <option value="Blues">Blues</option>
+        <option value="Salsa">Salsa</option>
+        <option value="Reggaeton">Reggaeton</option>
+        <option value="pop">pop</option>
+        <option value="Electronica">Electronica</option>
+        <option value="Rock">Rock</option>
+        <option value="Punk">Punk</option>
+        <option value="Metal">Metal</option>
+        <option value="Funk">Funk</option>
+        <option value="Contry">Contry</option>
+        <option value="Hip Hop">Hip Hop</option>
+        <option value="Ska">Ska</option>
+        <option value="Reggae">Reggae</option>
+      </select>
+    </div>
+    <input type="text" name="price" placeholder="precio" />
+    <input type="checkbox" name="exchange" id="" value="True" />
+    <textarea
+      name="content"
+      id=""
+      cols="30"
+      placeholder="contenido"
+      rows="10"
+    ></textarea>
+    <input type="submit" value="Subir" />
+  </form>
+</div>
+{% endblock body_content %}

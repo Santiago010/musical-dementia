@@ -1,28 +1,19 @@
-{% extends 'struct.html' %} {% block head_content %}
-<title>list publications</title>
+{% extends 'publications/struct.html' %} {% block head_content %}
+<title>Lista de publicaciones</title>
 {% endblock head_content %} {% block body_content %}
-<div class="grid-container">
-  <header class="grid-header"></header>
-  <main class="grid-main">
-    {% for publication in publications %}
+<div>
+  {% for publication in publications %}
+  <div>
+    <small>{{publication.user.username}}</small>
     <div>
-      <div>
-        <img src="{{publication.user.photo}}" alt="" width="150px" />
-        <small>{{publication.user.username}}</small>
-      </div>
-      <div>
-        <img src="{{publication.publication.picture}}" width="300px" alt="" />
-        <ul>
-          {% for info in publication.publication.info %}
-          <li>{{info}}</li>
-          {% endfor %}
-        </ul>
-      </div>
-      <p>{{publication.publication.description}}</p>
+      <img src="{{publication.image_front.url}}" alt="" />
+      <img src="{{publication.image_back.url}}" alt="" />
     </div>
-    {% endfor %}
-  </main>
-  <!-- <aside></aside> -->
-  <footer></footer>
+    <div>
+      <p>{{publication.description}}</p>
+    </div>
+    <b>{{publication.price}}</b>
+  </div>
+  {% endfor %}
 </div>
 {% endblock body_content %}

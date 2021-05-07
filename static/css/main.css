@@ -31,6 +31,7 @@ body {
     );
   background-size: 56px 56px;
   background-position: 0 0, 28px 28px;
+  user-select: none;
 }
 
 .container {
@@ -52,6 +53,7 @@ body {
   text-transform: uppercase;
   font-weight: 600;
 }
+
 .container__form {
   display: flex;
   flex-direction: column;
@@ -63,6 +65,7 @@ body {
   padding: 0.5em 0.3em;
   border: none;
   height: 2em;
+  width: 100%;
   color: var(--color-dark);
   border-radius: 0.3em;
   background-color: var(--color-sure);
@@ -132,11 +135,20 @@ body {
 .container__form__textarea {
   font-family: var(--font-principal);
   background-color: var(--color-sure);
-
+  width: 100%;
   color: var(--color-dark);
   border-radius: 0.3em;
   border: none;
   margin: 0.2em 0;
   padding: 0.5em 0.3em;
   resize: none;
+}
+
+.container-errors {
+  text-align: center;
+  color: var(--first-color-principal);
+  font-family: var(--font-principal);
+  height: min-content;
+  width: min-content;
+  margin: 0.2em;
 }
