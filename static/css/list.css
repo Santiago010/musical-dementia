@@ -1,0 +1,199 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-sure: #e8e8e8;
+  --color-dark: #222831;
+  --first-color-principal: #f05454;
+  --second-color-principal: #30475e;
+  --font-principal: "Signika Negative", sans-serif;
+}
+
+body {
+  width: 100vw;
+  background-color: var(--color-sure);
+  background-image: radial-gradient(
+      var(--color-dark) 1.4000000000000001px,
+      transparent 1.4000000000000001px
+    ),
+    radial-gradient(
+      var(--color-dark) 1.4000000000000001px,
+      var(--color-sure) 1.4000000000000001px
+    );
+  background-size: 56px 56px;
+  background-position: 0 0, 28px 28px;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  background-color: rgba(34, 40, 49, 0.9);
+  padding: 0.5em;
+  z-index: 1;
+}
+
+.header__box-image {
+}
+
+.header__box-image img {
+  filter: grayscale(100%);
+}
+
+.header__nav {
+}
+
+.header__nav__a {
+  text-decoration: none;
+  font-family: var(--font-principal);
+  font-weight: 500;
+  color: var(--color-sure);
+  text-align: center;
+  padding: 0.8em 1em;
+  transition-property: background-color, border-radius, text-decoration;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.57, 0.17, 0.18, 0.57);
+}
+
+.header__nav__a i {
+  font-size: 1.3em;
+  margin: 0.2em;
+}
+.header__nav__a:hover {
+  background-color: rgba(34, 40, 49, 1);
+  border-radius: 0.3em;
+  text-decoration: overline;
+}
+
+.container {
+  padding: 5em 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.container__publication {
+  margin: 1em;
+  width: 500px;
+  border-radius: 1em;
+  background: #e8e8e8;
+  box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
+  height: max-content;
+}
+
+.publication__info-user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+  text-decoration: none;
+}
+
+.publication__info-user p {
+  font-family: var(--font-principal);
+  color: var(--color-dark);
+  font-size: 1.2em;
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+
+.publications__info-user__photo {
+  width: 65px;
+  height: 65px;
+  border-radius: 100%;
+  border: 0.1em dashed var(--second-color-principal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.publications__info-user__photo img {
+  border-radius: 100%;
+  object-fit: cover;
+  width: 60px;
+  height: 60px;
+}
+
+.publication__date {
+  border-top: 0.1em solid var(--second-color-principal);
+  text-align: center;
+  font-family: var(--font-principal);
+  color: var(--second-color-principal);
+  font-size: 1em;
+  font-weight: 300;
+  padding: 0.5em 0;
+}
+
+.publication__image {
+  background-size: cover;
+  position: relative;
+  width: 500px;
+  height: 400px;
+}
+
+.publication__image__images {
+  width: 100%;
+}
+
+.publication__image__images--image__front {
+  height: 400px;
+}
+
+.publication__image__images--back {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 0;
+  transition-property: height;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.publication__image:hover .publication__image__images--back {
+  height: 100%;
+  cursor: pointer;
+}
+
+.publication__description,
+.publication__content {
+  font-family: var(--font-principal);
+  font-size: 1em;
+  line-height: 1em;
+  padding: 0.5em;
+  color: var(--second-color-principal);
+}
+
+.publication__details {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em;
+  align-items: center;
+}
+
+.publication__details div {
+  color: var(--color-sure);
+  padding: 0.5em;
+  border-radius: 0.5em;
+  font-family: var(--font-principal);
+  font-size: 0.8em;
+  text-transform: lowercase;
+}
+
+.publication__details div:nth-child(1),
+.publication__details div:nth-child(3) {
+  background-color: var(--color-dark);
+}
+
+.publication__details__exchange--true {
+  background-color: var(--first-color-principal);
+}
+
+.publication__details__exchange--false {
+  background-color: var(--second-color-principal);
+}

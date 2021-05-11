@@ -20,17 +20,17 @@ from publications.models import Publication
 
 @login_required
 def view_publications(request):
-    list_publications = Publication.objects.all()
-    # pdb.set_trace()
+    list_publications = Publication.objects.all().order_by("-publication_date")
     return render(
         request=request,
         template_name='publications/list.html',
-        context={'publications': list_publications}
+        context={
+            'publications': list_publications
+        }
     )
 
 @login_required
 def view_new_publications(request):
-
     if request.method == 'POST':
         form_new_publications = NewPublicationForm(request.POST,request.FILES)
 
@@ -46,6 +46,8 @@ def view_new_publications(request):
         request=request,
         template_name='publications/new.html',
         context={
+            'user' : request.user.pk,
+            'profile' : request.user.profile.pk,
             'form': form_new_publications
         }
     )

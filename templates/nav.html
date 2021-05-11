@@ -1,5 +1,19 @@
-<nav>
-  <a href=""><i class="far fa-user-circle"></i></a>
-  <a href=""><i class="fas fa-compact-disc"></i></a>
-  <a href="{% url 'new_publications' %}"><i class="fas fa-plus"></i></a>
-</nav>
+{% load static %}
+<header class="header">
+  <div class="header__box-image">
+    <img src="{% static 'images/favicon.png' %}" alt="" />
+  </div>
+  <nav class="header__nav">
+    <a href="" class="header__nav__a">Perfil<i class="far fa-user"></i></a>
+    <a href="{% url 'publications' %}" class="header__nav__a"
+      >Publicaciones<i class="fas fa-compact-disc"></i
+    ></a>
+    <a href="" class="header__nav__a">Buscar<i class="fas fa-search"></i></a>
+    <a href="" class="header__nav__a"
+      >Conversaciones<i class="far fa-comments"></i
+    ></a>
+    <a href="{% url 'new_publications' %}" class="header__nav__a"
+      >Añadir<i class="fas fa-plus"></i
+    ></a>
+  </nav>
+</header>
