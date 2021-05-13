@@ -36,7 +36,7 @@ def view_new_publications(request):
 
         if form_new_publications.is_valid():
             form_new_publications.save()
-            return redirect('publications')
+            return redirect('publications:list')
 
     else:
         form_new_publications = NewPublicationForm()

@@ -1,4 +1,4 @@
-{% extends 'profiles/struct.html' %} {% block head_content %}
+{% extends 'struct_base2.html' %} {% block head_content %}
 <title>update profile: @{{request.user.username}}</title>
 {% endblock head_content %} {% block body_content %} {% load static %}
 <div class="container">
@@ -15,7 +15,7 @@
     </p>
   </div>
   <form
-    action=" {% url 'update_user' %} "
+    action=" {% url 'profiles:update' %} "
     method="POST"
     class="container__form"
     enctype="multipart/form-data"

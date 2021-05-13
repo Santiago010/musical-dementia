@@ -1,0 +1,8 @@
+{% extends 'struct_base1.html' %} {% block head_content %}
+<title>Details User{{profile.id}}</title>
+{% endblock head_content %} {% block body_content %}
+<p>{{profile.user}}</p>
+{% for publication in publications %}
+<p>{{publication.profile.id}}</p>
+<p>{{publication.description}}</p>
+{% endfor %} {% endblock body_content %}

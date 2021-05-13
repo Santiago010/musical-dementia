@@ -1,131 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="static/favicon.png" type="image/x-icon" />
-    {% load static %}
-    <link rel="stylesheet" href=" {% static 'css/new.css' %} " />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
-      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
-      crossorigin="anonymous"
-    />
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="container">
-      <p class="container__paragraph">
-        Publica tu disco para venderlo o para intercambiar por otro <br /><i
-          class="fas fa-record-vinyl"
-        ></i>
-      </p>
-      <form
-        action="{% url 'new_publications' %}"
-        method="POST"
-        enctype="multipart/form-data"
-      >
-        {% csrf_token %}
-        <input type="hidden" name="user" value="{{user}}" />
-        <input type="hidden" name="profile" value="{{profile}}" />
-        <div>
-          <label class="container__label" for="image_front"
-            >Imagen de portada</label
-          >
-          <div class="container__form__input-image">
-            <input
-              type="file"
-              name="image_front"
-              accept="image/*"
-              id="image_front"
-            />
-          </div>
-          <div class="container-errors"></div>
-        </div>
-        <div>
-          <label class="container__label" for="image_front"
-            >Imagen de contraportada</label
-          >
-          <div class="container__form__input-image">
-            <input
-              type="file"
-              name="image_back"
-              accept="image/*"
-              id="image_back"
-            />
-          </div>
-          <div class="container-errors"></div>
-        </div>
-        <div>
-          <textarea
-            class="container__form__textarea"
-            name="description"
-            placeholder="descripcion"
-            id=""
-            rows="5"
-          ></textarea>
-          <div class="container-errors"></div>
-        </div>
-        <div>
-          <label class="container__label" for="tag_musical_genre"
-            >Genero Musical:
-          </label>
-          <select
-            class="container__form_select"
-            name="tag_musical_genre"
-            id="tag_musical_genre"
-          >
-            <option class="select__option" value="Jazz">Jazz</option>
-            <option class="select__option" value="Blues">Blues</option>
-            <option class="select__option" value="Salsa">Salsa</option>
-            <option class="select__option" value="Reggaeton">Reggaeton</option>
-            <option class="select__option" value="pop">pop</option>
-            <option class="select__option" value="Electronica">
-              Electronica
-            </option>
-            <option class="select__option" value="Rock">Rock</option>
-            <option class="select__option" value="Punk">Punk</option>
-            <option class="select__option" value="Metal">Metal</option>
-            <option class="select__option" value="Funk">Funk</option>
-            <option class="select__option" value="Contry">Contry</option>
-            <option class="select__option" value="Hip Hop">Hip Hop</option>
-            <option class="select__option" value="Ska">Ska</option>
-            <option class="select__option" value="Reggae">Reggae</option>
-          </select>
-        </div>
-        <div>
+{% extends 'struct_base1.html' %}{% block head_content %}
+<title>Nueva publicacion</title>
+{% endblock head_content %} {% block body_content %}
+<main class="container">
+  <div class="container__form">
+    <p class="container__paragraph">
+      Publica tu disco para venderlo o para intercambiar por otro <br /><i
+        class="fas fa-record-vinyl"
+      ></i>
+    </p>
+    <form
+      action="{% url 'publications:new' %}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <input type="hidden" name="user" value="{{user}}" />
+      <input type="hidden" name="profile" value="{{profile}}" />
+      <div>
+        <label class="container__label" for="image_front"
+          >Imagen de portada</label
+        >
+        <div class="container__form__input-image">
           <input
-            class="container__form__input"
-            type="text"
-            name="price"
-            placeholder="precio"
+            type="file"
+            name="image_front"
+            accept="image/*"
+            id="image_front"
+            required
           />
-          <div class="container-errors"></div>
         </div>
-        <div>
-          <input type="checkbox" name="exchange" id="exchange" value="True" />
-          <label class="container__label" for="exchange"
-            >Marca la casilla y si te gustaria hacer un intercambio</label
-          >
+        <div class="container-errors">{{form.image_front.errors}}</div>
+      </div>
+      <div>
+        <label class="container__label" for="image_front"
+          >Imagen de contraportada</label
+        >
+        <div class="container__form__input-image">
+          <input
+            type="file"
+            name="image_back"
+            accept="image/*"
+            required
+            id="image_back"
+          />
         </div>
-        <div>
-          <textarea
-            class="container__form__textarea"
-            name="content"
-            placeholder="contenido del album"
-            id=""
-            rows="5"
-          ></textarea>
-          <div class="container-errors">{{form.errors}}</div>
-        </div>
+        <div class="container-errors">{{form.image_back.errors}}</div>
+      </div>
+      <div>
+        <textarea
+          class="container__form__textarea"
+          name="description"
+          placeholder="descripcion"
+          id=""
+          rows="5"
+          required
+          maxlength="50"
+        ></textarea>
+        <div class="container-errors">{{form.description.errros}}</div>
+      </div>
+      <div>
+        <label class="container__label" for="tag_musical_genre"
+          >Genero Musical:
+        </label>
+        <select
+          class="container__form_select"
+          name="tag_musical_genre"
+          id="tag_musical_genre"
+        >
+          <option class="select__option" value="Jazz">Jazz</option>
+          <option class="select__option" value="Blues">Blues</option>
+          <option class="select__option" value="Salsa">Salsa</option>
+          <option class="select__option" value="Reggaeton">Reggaeton</option>
+          <option class="select__option" value="pop">pop</option>
+          <option class="select__option" value="Electronica">
+            Electronica
+          </option>
+          <option class="select__option" value="Rock">Rock</option>
+          <option class="select__option" value="Punk">Punk</option>
+          <option class="select__option" value="Metal">Metal</option>
+          <option class="select__option" value="Funk">Funk</option>
+          <option class="select__option" value="Contry">Contry</option>
+          <option class="select__option" value="Hip Hop">Hip Hop</option>
+          <option class="select__option" value="Ska">Ska</option>
+          <option class="select__option" value="Reggae">Reggae</option>
+          <option class="select__option" value="Reggae">Trap</option>
+          <option class="select__option" value="Reggae">Clasica</option>
+          <option class="select__option" value="Reggae">Country</option>
+          <option class="select__option" value="Reggae">Cumbia</option>
+          <option class="select__option" value="Reggae">Disco</option>
+          <option class="select__option" value="Reggae">Punk</option>
+          <option class="select__option" value="Reggae">Indie</option>
+          <option class="select__option" value="Reggae">Punk</option>
+          <option class="select__option" value="Reggae">Grunge</option>
+          <option class="select__option" value="Reggae">Swing</option>
+          <option class="select__option" value="Reggae">Tango</option>
+          <option class="select__option" value="Reggae">Vallenato</option>
+        </select>
+      </div>
+      <div>
         <input
-          class="container__form__input container__form__input--submit"
-          type="submit"
-          value="Subir"
+          class="container__form__input"
+          type="text"
+          name="price"
+          placeholder="precio"
+          required
+          maxlength="10"
         />
-      </form>
-    </div>
-  </body>
-</html>
+        <div class="container-errors">{{form.price.errors}}</div>
+      </div>
+      <div>
+        <input type="checkbox" name="exchange" id="exchange" value="True" />
+        <label class="container__label" for="exchange"
+          >Marca la casilla y si te gustaria hacer un intercambio</label
+        >
+      </div>
+      <div>
+        <textarea
+          class="container__form__textarea"
+          name="content"
+          placeholder="contenido del album"
+          id=""
+          rows="5"
+          maxlength="50"
+        ></textarea>
+        <div class="container-errors">{{form.content.errors}}</div>
+      </div>
+      <input
+        class="container__form__input container__form__input--submit"
+        type="submit"
+        value="Subir"
+      />
+    </form>
+  </div>
+</main>
+{% endblock body_content %}

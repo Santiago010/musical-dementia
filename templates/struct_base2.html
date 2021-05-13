@@ -10,7 +10,7 @@
       href=" {% static 'images/favicon.png' %} "
       type="image/x-icon"
     />
-    <link rel="stylesheet" href=" {% static 'css/list.css' %} " />
+    <link rel="stylesheet" href=" {% static 'css/profiles/main.css' %} " />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
@@ -20,6 +20,6 @@
     {% block head_content %}{% endblock head_content %}
   </head>
   <body>
-    {% include 'nav.html' %} {% block body_content %}{% endblock body_content %}
+    {% block body_content %}{% endblock body_content %}
   </body>
 </html>

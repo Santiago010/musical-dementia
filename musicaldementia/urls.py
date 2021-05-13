@@ -15,23 +15,14 @@ Including another URLconf
 """
 # Django
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-# Views app publications
-from publications import views as views_publications
-
-# View app profiles
-from profiles import views as views_profiles
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views_publications.view_publications,name='publications'),
-    path('new/',views_publications.view_new_publications,name='new_publications'),
-    path('users/login/',views_profiles.login_user, name="login_user"),
-    path('users/logout/',views_profiles.logout_view,name="logout_user"),
-    path('users/signup/',views_profiles.signup_view,name='signup_user'),
-    path('users/update/',views_profiles.update_profile,name="update_user")
+    path('',include(('publications.urls','publications'),namespace='publications')),
+    path('profiles/',include(('profiles.urls','profiles'),namespace='profiles'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

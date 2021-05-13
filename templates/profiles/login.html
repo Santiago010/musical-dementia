@@ -1,4 +1,4 @@
-{% extends 'profiles/struct.html' %} {% block head_content %}
+{% extends 'struct_base2.html' %} {% block head_content %}
 <title>Login User</title>
 {% endblock head_content %} {% block body_content %} {% load static %}
 <div class="container">
@@ -14,7 +14,11 @@
       y comienza un viaje fascinante buscando tu musica favorita
     </p>
   </div>
-  <form method="POST" action=" {% url 'login_user' %} " class="container__form">
+  <form
+    method="POST"
+    action=" {% url 'profiles:login' %} "
+    class="container__form"
+  >
     {% csrf_token %}
     <input
       class="container__form__input"
@@ -45,7 +49,7 @@
   <p class="container__pararaph-link">
     ¡no tienes una cuenta! crea una dando click en el boton de play
   </p>
-  <a class="container__link" href=" {% url 'signup_user' %} "
+  <a class="container__link" href=" {% url 'profiles:signup' %} "
     ><i class="fas fa-play"></i
   ></a>
 </div>

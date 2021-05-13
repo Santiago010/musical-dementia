@@ -19,8 +19,8 @@ class Simple_Middleware:
             print(the_profile.photo)
 
             if not the_profile.phone_number or not the_profile.photo or not the_profile.interest:
-                if request.path not in [reverse('update_user'),reverse('logout_user'),'admin/']:
-                    return redirect('update_user')
+                if request.path not in [reverse('profiles:update'),reverse('profiles:logout'),'admin/']:
+                    return redirect('profiles:update')
 
         response = self.get_response(request)
 

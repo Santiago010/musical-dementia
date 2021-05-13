@@ -1,4 +1,4 @@
-{% extends 'profiles/struct.html' %} {% block head_content %}
+{% extends 'struct_base2.html' %} {% block head_content %}
 <title>Sign-up User</title>
 {% endblock head_content %} {% block body_content %} {% load static %}
 <div class="container">
@@ -14,7 +14,11 @@
       y sumergete en un mundo de posibilidades para encontrar tu disco favorito
     </p>
   </div>
-  <form method="POST" action="{% url 'signup_user' %} " class="container__form">
+  <form
+    method="POST"
+    action="{% url 'profiles:signup' %} "
+    class="container__form"
+  >
     {% csrf_token %}
     <div>
       <input

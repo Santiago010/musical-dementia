@@ -2,10 +2,11 @@
 
 # Django
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
 from django.forms import ValidationError
+from django.views.generic import DetailView
 
 # Utilities
 import pdb
@@ -16,10 +17,23 @@ from profiles.forms import UpdateDataForm, SignupForm
 # Models
 from django.contrib.auth.models import User
 from profiles.models import Profile
+from publications.models import Publication
 
 # Create your views here.
 
 
+class ProfileDetailView(DetailView):
+    slug_field = 'id'
+    slug_url_kwarg = 'id'
+    queryset = Profile.objects.all()
+    template_name = 'profiles/details.html'
+    context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        profile = self.get_object()
+        context['publications'] = Publication.objects.filter(profile=profile)
+        return context
 
 def login_user(request):
     if request.method == 'POST':
@@ -39,7 +53,7 @@ def login_user(request):
                 request=request,
                 user=user
             )
-            return redirect('publications')
+            return redirect('publications:list')
         else : 
             return render(
                 request=request,
@@ -56,7 +70,7 @@ def login_user(request):
 @login_required
 def logout_view(request):
     logout(request=request)
-    return redirect('login_user')
+    return redirect('profiles:login')
 
 
 def signup_view(request):
@@ -65,7 +79,7 @@ def signup_view(request):
 
         if form_signup.is_valid():
             form_signup.save()
-            return redirect('login_user')
+            return redirect('profiles:login')
         else:
             form_signup.add_error('password',ValidationError("La contraseña de confirmacion no concide."))
 
@@ -91,7 +105,7 @@ def update_profile(request):
             query_profile.interest = new_data['interest']
             query_profile.phone_number = new_data['phone_number']
             query_profile.save()
-            return redirect('publications')
+            return redirect('publications:list')
 
 
     else : 
