@@ -7,7 +7,7 @@
   <div class="container__publication">
     <a
       class="publication__info-user"
-      href="{% url 'profiles:details' publication.profile.id %}"
+      href="{% url 'users:details' publication.profile.id %}"
     >
       <div class="publications__info-user__photo">
         <img src="{{publication.profile.photo.url}}" alt="" />

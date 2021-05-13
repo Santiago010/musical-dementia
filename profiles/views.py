@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
 from django.forms import ValidationError
 from django.views.generic import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Utilities
 import pdb
@@ -22,7 +23,7 @@ from publications.models import Publication
 # Create your views here.
 
 
-class ProfileDetailView(DetailView):
+class ProfileDetailView(LoginRequiredMixin,DetailView):
     slug_field = 'id'
     slug_url_kwarg = 'id'
     queryset = Profile.objects.all()
@@ -32,7 +33,7 @@ class ProfileDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
         profile = self.get_object()
-        context['publications'] = Publication.objects.filter(profile=profile)
+        context['publications'] = Publication.objects.filter(profile=profile).order_by('-publication_date')
         return context
 
 def login_user(request):
@@ -70,7 +71,7 @@ def login_user(request):
 @login_required
 def logout_view(request):
     logout(request=request)
-    return redirect('profiles:login')
+    return redirect('users:login')
 
 
 def signup_view(request):
@@ -79,7 +80,7 @@ def signup_view(request):
 
         if form_signup.is_valid():
             form_signup.save()
-            return redirect('profiles:login')
+            return redirect('users:login')
         else:
             form_signup.add_error('password',ValidationError("La contraseña de confirmacion no concide."))
 

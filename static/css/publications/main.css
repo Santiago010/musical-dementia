@@ -13,7 +13,6 @@
 }
 
 body {
-  width: 100vw;
   background-color: var(--color-sure);
   background-image: radial-gradient(
       var(--color-dark) 1.4000000000000001px,
@@ -36,8 +35,8 @@ body {
 }
 
 .container__publication {
-  margin: 1em;
-  width: 500px;
+  margin: 1em 0.5em;
+  max-width: 500px;
   border-radius: 1em;
   background: #e8e8e8;
   box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
@@ -299,4 +298,176 @@ body {
   font-weight: 700;
   color: var(--first-color-principal);
   font-size: 1.2em;
+}
+
+.container__detail {
+  max-width: 100%;
+  min-width: 60%;
+  border-radius: 1em;
+  background: #e8e8e8;
+  box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
+}
+
+.detail__header {
+  display: flex;
+  min-height: 250px;
+  flex-wrap: wrap;
+  padding: 1em;
+}
+
+.header__presentation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.presentation__photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  border: 0.1em dashed var(--second-color-principal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.presentation__photo img {
+  border-radius: 100%;
+  object-fit: cover;
+  width: 95px;
+  height: 95px;
+}
+
+.presentation__username {
+  margin-top: 0.3em;
+  font-family: var(--font-principal);
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  font-size: 500;
+  color: var(--second-color-principal);
+}
+
+.detail__header > div {
+  width: 50%;
+}
+
+.header__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header__info label {
+  text-transform: uppercase;
+  font-size: 1.5em;
+  font-family: var(--font-principal);
+  color: var(--color-dark);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+.info__list {
+  margin-top: 0.3em;
+  color: var(--second-color-principal);
+  font-family: var(--font-principal);
+  font-size: 0.9em;
+}
+
+.info__list li {
+  list-style-type: circle;
+}
+
+.header__info a {
+  align-self: flex-end;
+  text-decoration: none;
+  color: var(--color-sure);
+  background-color: var(--first-color-principal);
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  font-family: var(--font-principal);
+  text-transform: capitalize;
+  transition-property: background-color text-decoration;
+  transition-duration: 0.3s;
+}
+
+.header__info a:hover {
+  background-color: var(--second-color-principal);
+  text-decoration: underline;
+}
+
+.header__description {
+  flex-grow: 1;
+  text-align: center;
+  font-family: var(--font-principal);
+}
+
+.header__description label {
+  text-transform: capitalize;
+  font-size: 1.5em;
+  color: var(--color-dark);
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-decoration: overline;
+}
+
+.header__description p {
+  margin-top: 0.3em;
+  color: var(--second-color-principal);
+}
+
+.detail__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail__body h1 {
+  font-family: var(--font-principal);
+  align-self: flex-start;
+  margin: 0 0.3em;
+  text-transform: capitalize;
+  font-size: 2em;
+  color: var(--color-dark);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+.body__publication {
+  margin: 1em;
+  /* width: min-content; */
+  max-width: 500px;
+  flex-grow: 1;
+  border-radius: 1em;
+  background: #e8e8e8;
+  box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
+  height: max-content;
+}
+
+.publication__link-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em 0;
+  text-decoration: none;
+  color: var(--color-sure);
+  background-color: var(--first-color-principal);
+  border-radius: 0.5em;
+  font-family: var(--font-principal);
+  text-transform: capitalize;
+  transition-property: background-color text-decoration;
+  transition-duration: 0.3s;
+}
+
+.publication__link-edit:hover {
+  background-color: var(--second-color-principal);
+  text-decoration: underline;
+}
+
+.publication__date-details {
+  text-align: center;
+  font-family: var(--font-principal);
+  color: var(--second-color-principal);
+  font-size: 1em;
+  font-weight: 300;
+  padding: 0.5em 0;
 }

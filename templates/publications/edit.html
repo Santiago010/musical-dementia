@@ -1,0 +1,7 @@
+{% extends 'struct_base1.html' %} {% block head_content %}
+<title>Edit Publication{{id_publication}}</title>
+{% endblock head_content %} {% block body_content %}
+<div class="container">
+  <a href="{% url 'publications:delete' id_publication %}">Delete</a>
+</div>
+{% endblock body_content %}

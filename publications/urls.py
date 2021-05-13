@@ -4,20 +4,30 @@
 from django.urls import path
 
 # Views
-from publications.views import view_new_publications, view_publications
+from publications import views
 
 app_name = "publications"
 
 urlpatterns = [
     path(
         route='',
-        view=view_publications,
+        view=views.view_publications,
         name='list'
     ),
     path(
         route='new/',
-        view=view_new_publications,
+        view=views.view_new_publications,
         name='new'
+    ),
+    path(
+        route='<int:id>/',
+        view=views.view_edit_publications,
+        name='edit'
+    ),
+    path(
+        route='delete/<int:id>/',
+        view=views.view_delete_publications,
+        name='delete'
     )
 ]
 

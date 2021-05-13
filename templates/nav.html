@@ -5,7 +5,7 @@
   </div>
   <nav class="header__nav">
     <a
-      href="{% url 'profiles:details' request.user.id %}"
+      href="{% url 'users:details' request.user.profile.id %}"
       class="header__nav__a"
       >Perfil<i class="far fa-user"></i
     ></a>

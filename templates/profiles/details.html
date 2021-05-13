@@ -1,8 +1,83 @@
 {% extends 'struct_base1.html' %} {% block head_content %}
-<title>Details User{{profile.id}}</title>
+<title>Details User</title>
 {% endblock head_content %} {% block body_content %}
-<p>{{profile.user}}</p>
-{% for publication in publications %}
-<p>{{publication.profile.id}}</p>
-<p>{{publication.description}}</p>
-{% endfor %} {% endblock body_content %}
+<div class="container">
+  <div class="container__detail">
+    <div class="detail__header">
+      <div class="header__presentation">
+        <div class="presentation__photo">
+          <img src="{{profile.photo.url}}" alt="" />
+        </div>
+        <p class="presentation__username">Santiago18</p>
+      </div>
+      <div class="header__info">
+        <label>Datos</label>
+        <ul class="info__list">
+          <li>{{profile.user.email}}</li>
+          <li>{{profile.phone_number}}</li>
+        </ul>
+        {% if request.user.profile == profile %}
+        <a href="{% url 'users:logout' %}" class="info__link">Editar Perfil</a>
+        {% else %}
+        <a href="" class="info__link">Contactar</a>
+        {% endif %}
+      </div>
+      <div class="header__description">
+        <label for="">Intereses Musicales</label>
+        <p>{{profile.interest}}</p>
+      </div>
+    </div>
+    <div class="detail__body">
+      <h1>Lista De Publicaciones</h1>
+      {% for publication in publications %}
+      <div class="body__publication">
+        {% if publication.profile == request.user.profile %}
+        <a
+          class="publication__link-edit"
+          href="{% url 'publications:edit' publication.id %}"
+        >
+          Editar publicacion
+        </a>
+        {% endif %}
+        <div class="publication__date-details">
+          Fecha de publicacion:
+          <time datetime="{{publication.publication_date}}"
+            >{{publication.publication_date}}</time
+          >
+        </div>
+        <div class="publication__image">
+          <img
+            class="
+              publication__image__images
+              publication__image__images--image__front
+            "
+            src="{{publication.image_front.url}}"
+            alt=""
+          />
+          <img
+            class="publication__image__images publication__image__images--back"
+            src="{{publication.image_back.url}}"
+            alt=""
+          />
+        </div>
+        <div class="publication__description">
+          <p>Descripcion: {{publication.description}}</p>
+        </div>
+        <div class="publication__details">
+          <div>{{publication.tag_musical_genre}}</div>
+          {% if publication.exchange == 1 %}
+          <div class="publication__details__exchange--true">CAMBIO</div>
+          {% else %}
+          <div class="publication__details__exchange--false">NO CAMBIO</div>
+          {% endif %}
+          <div>PRECIO : {{publication.price}}</div>
+        </div>
+        <div class="publication__content">
+          <p>contenido: {{publication.content}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock body_content %}

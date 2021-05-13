@@ -16,11 +16,10 @@ class Simple_Middleware:
 
         if not request.user.is_anonymous:
             the_profile = request.user.profile
-            print(the_profile.photo)
 
             if not the_profile.phone_number or not the_profile.photo or not the_profile.interest:
-                if request.path not in [reverse('profiles:update'),reverse('profiles:logout'),'admin/']:
-                    return redirect('profiles:update')
+                if request.path not in [reverse('users:update'),reverse('users:logout'),'admin/']:
+                    return redirect('users:update')
 
         response = self.get_response(request)
 

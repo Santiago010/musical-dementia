@@ -1,10 +1,13 @@
 """views publications"""
 
 # Django
+import publications
+from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.forms import ValidationError
+from django.urls import reverse
 
 # Utilities
 import pdb
@@ -51,3 +54,15 @@ def view_new_publications(request):
             'form': form_new_publications
         }
     )
+
+
+@login_required
+def view_edit_publications(request,id):
+    return render(request=request,template_name='publications/edit.html',context={'id_publication':id})
+
+@login_required
+def view_delete_publications(request,id):
+    publication_delete = Publication.objects.get(id=id)
+    publication_delete.delete()
+    url_redirect = reverse('users:details', kwargs={'id':request.user.profile.id})
+    return redirect(url_redirect)
