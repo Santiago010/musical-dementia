@@ -1,6 +1,7 @@
 """views publications"""
 
 # Django
+from profiles.models import Profile
 import publications
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
@@ -58,11 +59,20 @@ def view_new_publications(request):
 
 @login_required
 def view_edit_publications(request,id):
-    return render(request=request,template_name='publications/edit.html',context={'id_publication':id})
+    edit_publication = Publication.objects.get(id=id)
+    return render(request=request,template_name='publications/edit.html',context={'publication':edit_publication})
 
 @login_required
 def view_delete_publications(request,id):
     publication_delete = Publication.objects.get(id=id)
     publication_delete.delete()
+    url_redirect = reverse('users:details', kwargs={'id':request.user.profile.id})
+    return redirect(url_redirect)
+
+@login_required
+def view_change_state(request,id):
+    profile_publication = Profile.objects.get(id=id)
+    profile_publication.sales_or_changes = profile_publication.sales_or_changes + 1 
+    pdb.set_trace()
     url_redirect = reverse('users:details', kwargs={'id':request.user.profile.id})
     return redirect(url_redirect)

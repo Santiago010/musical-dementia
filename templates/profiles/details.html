@@ -13,8 +13,11 @@
       <div class="header__info">
         <label>Datos</label>
         <ul class="info__list">
-          <li>{{profile.user.email}}</li>
-          <li>{{profile.phone_number}}</li>
+          <li>Correo: {{profile.user.email}}</li>
+          <li>Numero: {{profile.phone_number}}</li>
+          <li>
+            Cantidad de discos vendidos o cambiados {{profile.sales_or_changes}}
+          </li>
         </ul>
         {% if request.user.profile == profile %}
         <a href="{% url 'users:logout' %}" class="info__link">Editar Perfil</a>

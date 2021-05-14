@@ -1,0 +1,56 @@
+:root {
+  --color-sure: #e8e8e8;
+  --color-dark: #222831;
+  --first-color-principal: #f05454;
+  --second-color-principal: #30475e;
+  --font-principal: "Signika Negative", sans-serif;
+}
+
+.modal {
+  position: relative;
+  visibility: hidden;
+  bottom: 65vh;
+  left: 45vw;
+  z-index: 1;
+  height: min-content;
+  width: max-content;
+  border-radius: 1em;
+  font-family: var(--font-principal);
+  background-color: var(--color-dark);
+  padding: 1em;
+  text-align: center;
+}
+
+.modal p {
+  color: var(--color-sure);
+}
+
+.modal__buttons {
+  display: flex;
+}
+
+.modal__buttons a {
+  color: var(--color-sure);
+  background-color: var(--first-color-principal);
+  border-radius: 0.5em;
+  padding: 0.5em;
+  width: 45%;
+  text-align: center;
+  margin: 0.5em;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+.modal__buttons button {
+  color: var(--color-dark);
+  background-color: var(--color-sure);
+  border-radius: 0.5em;
+  padding: 0.5em;
+  width: 45%;
+  text-align: center;
+  margin: 0.5em;
+  text-transform: capitalize;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}

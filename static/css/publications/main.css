@@ -24,6 +24,7 @@ body {
     );
   background-size: 56px 56px;
   background-position: 0 0, 28px 28px;
+  position: relative;
 }
 
 .container {
@@ -89,7 +90,7 @@ body {
 .publication__image {
   background-size: cover;
   position: relative;
-  width: 500px;
+  width: 100%;
   height: 400px;
 }
 
@@ -123,6 +124,11 @@ body {
   line-height: 1em;
   padding: 0.5em;
   color: var(--second-color-principal);
+}
+
+.detail {
+  max-width: 100%;
+  min-width: 60%;
 }
 
 .publication__details {
@@ -470,4 +476,60 @@ body {
   font-size: 1em;
   font-weight: 300;
   padding: 0.5em 0;
+}
+
+.publications__actions {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-principal);
+}
+
+.publications__actions a {
+  color: var(--color-sure);
+  border-radius: 0.5em;
+  padding: 0.5em 0;
+  width: 45%;
+  text-align: center;
+  margin: 0.5em;
+  text-transform: capitalize;
+  transition-property: background-color text-decoration;
+  transition-duration: 0.3s;
+  text-decoration: none;
+}
+
+.actions__delete {
+  background-color: var(--first-color-principal);
+  color: var(--color-sure);
+  border-radius: 0.5em;
+  padding: 0.5em 0;
+  width: 45%;
+  text-align: center;
+  margin: 0.5em;
+  text-transform: capitalize;
+  transition-property: background-color text-decoration;
+  transition-duration: 0.3s;
+  /* text-decoration: none; */
+  border: none;
+}
+
+.actions__delete:hover {
+  background-color: var(--second-color-principal);
+}
+
+.actions__exchange {
+  background-color: var(--second-color-principal);
+  color: var(--color-sure);
+  border-radius: 0.5em;
+  padding: 0.5em 0;
+  width: 45%;
+  text-align: center;
+  margin: 0.5em;
+  text-transform: capitalize;
+  transition-property: background-color text-decoration;
+  transition-duration: 0.3s;
+  text-decoration: none;
+}
+
+.actions__exchange:hover {
+  background-color: var(--first-color-principal);
 }

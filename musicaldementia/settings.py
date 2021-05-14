@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Apps Local
     'publications',
-    'profiles'
+    'profiles',
+    'search_tags'
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,9 @@
+<div class="modal">
+  <p>Estas Seguro?</p>
+  <div class="modal__buttons">
+    <a href="{% url 'publications:delete' publication.id %}">Eliminar</a>
+    <button>Cancelar</button>
+  </div>
+</div>
+{% load static %}
+<script src="{% static 'js/modal.js' %}"></script>

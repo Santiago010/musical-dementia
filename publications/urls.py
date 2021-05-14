@@ -28,6 +28,11 @@ urlpatterns = [
         route='delete/<int:id>/',
         view=views.view_delete_publications,
         name='delete'
+    ),
+    path(
+        route='change_state/<int:id>/',
+        view=views.view_change_state,
+        name='change_state'
     )
 ]
 
