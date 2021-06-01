@@ -73,6 +73,6 @@ def view_delete_publications(request,id):
 def view_change_state(request,id):
     profile_publication = Profile.objects.get(id=id)
     profile_publication.sales_or_changes = profile_publication.sales_or_changes + 1 
-    pdb.set_trace()
+    profile_publication.save()
     url_redirect = reverse('users:details', kwargs={'id':request.user.profile.id})
     return redirect(url_redirect)

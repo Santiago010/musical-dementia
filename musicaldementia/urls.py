@@ -19,10 +19,14 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+# Views
+from search_tags.views import principal
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(('publications.urls','publications'),namespace='publications')),
-    path('users/',include(('profiles.urls','users'),namespace='users'))
+    path('users/',include(('profiles.urls','users'),namespace='users')),
+    path('chat/',include(('chat.urls','chat'),namespace='chat')),
+    path('search_tags/',include(('search_tags.urls','search_tags'),namespace='search_tags')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

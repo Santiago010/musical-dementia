@@ -4,7 +4,6 @@ const publications__actions = document.querySelector(
 ).firstElementChild;
 
 publications__actions.onclick = () => {
-  console.log("modal");
   modal.style.visibility = "visible";
   document.body.children[1].style.opacity = "0.2";
 };

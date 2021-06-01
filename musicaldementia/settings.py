@@ -38,10 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Channels
+    'channels',
     # Apps Local
     'publications',
     'profiles',
-    'search_tags'
+    'search_tags',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +78,18 @@ TEMPLATES = [
     },
 ]
 
+# Settings interface
 WSGI_APPLICATION = 'musicaldementia.wsgi.application'
+ASGI_APPLICATION = 'musicaldementia.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 
 # Database

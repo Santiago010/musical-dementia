@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link
+      rel="shortcut icon"
+      href=" {% static 'images/favicon.png' %} "
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href=" {% static 'css/search_tags/main.css' %} " />
+    <link rel="stylesheet" href=" {% static 'css/nav.css' %} " />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
+    {% block head_content %}{% endblock head_content %}
+  </head>
+  <body>
+    {% include 'nav.html' %} {% block body_content %}{% endblock body_content %}
+  </body>
+</html>

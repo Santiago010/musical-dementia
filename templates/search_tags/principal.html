@@ -1,0 +1,21 @@
+{% extends 'struct_base3.html' %} {% block head_content %}
+<title>Search tags</title>
+{% endblock head_content %} {% block body_content %}
+<nav class="container">
+  {% load static %}
+  <a class="container__links" href="{% url 'search_tags:profiles' %}">
+    <img
+      src="{% static 'images/image_search_profiles.svg' %}"
+      alt="image search profiles"
+    />
+    <p>Perfiles</p>
+  </a>
+  <a class="container__links" href=" {% url 'search_tags:publications' %} ">
+    <img
+      src="{% static 'images/image_search_publications.svg' %}"
+      alt="image search publications"
+    />
+    <p>publicaciones</p>
+  </a>
+</nav>
+{% endblock body_content %}

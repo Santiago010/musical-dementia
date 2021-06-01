@@ -1,0 +1,62 @@
+{% extends 'struct_base3.html' %} {% block head_content %}
+<title>search profiles</title>
+{% endblock head_content %} {% block body_content %}
+<div class="container">
+  <form
+    class="container__form"
+    action="{% url 'search_tags:profiles' %}"
+    method="POST"
+  >
+    {% csrf_token %}
+    <input
+      type="text"
+      name="tag"
+      value="{{tag}}"
+      placeholder="genero musical"
+      required
+    />
+    <button type="submit">Buscar <i class="fab fa-searchengin"></i></button>
+  </form>
+  <div class="container__principal">
+    {% if error %}
+    <p class="principal__paragraph">{{error}}</p>
+    {% endif %} {% if not profiles %}
+    <p class="principal__paragraph">
+      ingresa un género en el buscador para buscar personas que tengan como
+      interés ese genero
+    </p>
+    {% endif %} {% for profile in profiles %}
+    <div class="principal__cards">
+      <div class="cards__presentation">
+        <a
+          class="presentation__photo"
+          href=" {% url 'users:details' profile.id %} "
+        >
+          <img src="{{profile.photo.url}}" alt="" />
+        </a>
+        <p class="presentation__username">{{profile.user.username}}</p>
+      </div>
+      <div class="cards__info">
+        <label>Datos</label>
+        <ul class="info__list">
+          <li>Correo: {{profile.user.email}}</li>
+          <li>Numero: {{profile.phone_number}}</li>
+          <li>
+            Cantidad de discos vendidos o cambiados {{profile.sales_or_changes}}
+          </li>
+        </ul>
+        {% if request.user.profile == profile %}
+        <a href="{% url 'users:logout' %}" class="info__link">Editar Perfil</a>
+        {% else %}
+        <a href="" class="info__link">Contactar</a>
+        {% endif %}
+      </div>
+      <div class="cards__description">
+        <label for="">Intereses Musicales</label>
+        <p>{{profile.interest}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock body_content %}

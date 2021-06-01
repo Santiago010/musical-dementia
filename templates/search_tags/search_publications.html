@@ -1,0 +1,77 @@
+{% extends 'struct_base3.html' %} {% block head_content %}
+<title>search profiles</title>
+{% endblock head_content %} {% block body_content %}
+<div class="container">
+  <form
+    class="container__form"
+    action="{% url 'search_tags:publications' %}"
+    method="POST"
+  >
+    {% csrf_token %}
+    <input
+      type="text"
+      name="tag"
+      value="{{tag}}"
+      placeholder="genero musical"
+      required
+    />
+    <button type="submit">Buscar <i class="fab fa-searchengin"></i></button>
+  </form>
+  <div class="container__principal">
+    {% if error %}
+    <p class="principal__paragraph">{{error}}</p>
+    {% endif %} {% if not publications %}
+    <p class="principal__paragraph">
+      ingresa un género en el buscador para buscar personas que tengan como
+      interés ese genero
+    </p>
+    {% endif %} {% for publication in publications %}
+
+    <div class="container__publication">
+      <a
+        class="publication__info-user"
+        href="{% url 'users:details' publication.profile.id %}"
+      >
+        <div class="publications__info-user__photo">
+          <img src="{{publication.profile.photo.url}}" alt="" />
+        </div>
+        <p>{{publication.user.username}}</p>
+      </a>
+      <div class="publication__date">
+        Fecha de publicacion:
+        <time datetime="2021 05 11">{{publication.publication_date}}</time>
+      </div>
+      <div class="publication__image">
+        <img
+          class="
+            publication__image__images publication__image__images--image__front
+          "
+          src="{{publication.image_front.url}}"
+          alt=""
+        />
+        <img
+          class="publication__image__images publication__image__images--back"
+          src="{{publication.image_back.url}}"
+          alt=""
+        />
+      </div>
+      <div class="publication__description">
+        <p>Descripcion:{{publication.description}}</p>
+      </div>
+      <div class="publication__details">
+        <div>Genero: {{publication.tag_musical_genre}}</div>
+        {% if publication.exchange == 1 %}
+        <div class="publication__details__exchange--true">CAMBIO</div>
+        {% else %}
+        <div class="publication__details__exchange--false">NO CAMBIO</div>
+        {% endif %}
+        <div>PRECIO: {{publication.price}}</div>
+      </div>
+      <div class="publication__content">
+        <p>Contenido: {{publication.content}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock body_content %}
