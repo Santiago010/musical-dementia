@@ -2,6 +2,7 @@
 # Archivo de la base de datos de produccion
 db.sqlite3
 # Archivo de datos de prueba
-user
+*.txt
 
+#carpeta de archivos media de prueba
 /media

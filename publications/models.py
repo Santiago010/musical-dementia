@@ -21,3 +21,4 @@ class Publication(models.Model):
     exchange = models.BooleanField(default=False)
     content = models.CharField(default="Contenido no especificado",max_length=100)
     publication_date = models.DateField(auto_now_add=True)
+    availability = models.BooleanField(default=False)

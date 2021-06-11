@@ -1,0 +1,9 @@
+<div class="modal">
+  <p>{{request.user.username}} estas seguro de eliminar tu cuenta?</p>
+  <div class="modal__buttons">
+    <a href="">Eliminar</a>
+    <button>Cancelar</button>
+  </div>
+</div>
+{% load static %}
+<script src="{% static 'js/modal.js' %}"></script>

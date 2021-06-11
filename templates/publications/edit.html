@@ -7,11 +7,13 @@
       <div class="body__publication">
         <div class="publications__actions">
           <button class="actions__delete">Eliminar</button>
+          {% if not publication.availability %}
           <a
-            href="{% url 'publications:change_state' request.user.profile.id %}"
+            href="{% url 'publications:change_state' publication.id %}"
             class="actions__exchange"
             >Vendido o intercambiado</a
           >
+          {% endif %}
         </div>
         <div class="publication__date-details">
           Fecha de publicacion:

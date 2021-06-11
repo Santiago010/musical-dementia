@@ -5,7 +5,7 @@
   <div class="container__detail">
     <div class="detail__header">
       <div class="header__presentation">
-        <div class="presentation__photo">
+        <div class="presentation__photo presentation__photo--detail">
           <img src="{{profile.photo.url}}" alt="" />
         </div>
         <p class="presentation__username">{{profile.user.username}}</p>
@@ -20,7 +20,7 @@
           </li>
         </ul>
         {% if request.user.profile == profile %}
-        <a href="{% url 'users:logout' %}" class="info__link">Editar Perfil</a>
+        <a href="{% url 'users:edit'%}" class="info__link">Editar Perfil</a>
         {% else %}
         <a href="" class="info__link">Contactar</a>
         {% endif %}

@@ -71,7 +71,10 @@ def view_delete_publications(request,id):
 
 @login_required
 def view_change_state(request,id):
-    profile_publication = Profile.objects.get(id=id)
+    publication__change = Publication.objects.get(id=id)
+    publication__change.availability = True
+    publication__change.save()
+    profile_publication = Profile.objects.get(id=publication__change.user.profile.id)
     profile_publication.sales_or_changes = profile_publication.sales_or_changes + 1 
     profile_publication.save()
     url_redirect = reverse('users:details', kwargs={'id':request.user.profile.id})

@@ -1,11 +1,12 @@
 """views profiles"""
 
 # Django
+import django
 from django.shortcuts import render, redirect
-# from django.http import HttpResponse
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
 from django.forms import ValidationError
+from django.urls.base import reverse, reverse_lazy
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -13,7 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import pdb
 
 # Form
-from profiles.forms import UpdateDataForm, SignupForm
+from profiles.forms import UpdateDataForm, SignupForm,EditForm
 
 # Models
 from django.contrib.auth.models import User
@@ -117,4 +118,30 @@ def update_profile(request):
         request=request,
         template_name='profiles/update.html',
         context= {'form':UpdateDataForm}
+    )
+
+
+@login_required
+def edit_profile(request):
+    data_profile = Profile.objects.get(id=request.user.profile.id)
+    if request.method == 'POST':
+        data_form = EditForm(request.POST,request.FILES)
+        if data_form.is_valid():
+            data_form.save()
+            return redirect('users:logout')
+        else:
+            print(data_form.errors)
+
+
+
+    else:
+        data_form = EditForm()
+
+    return render(
+        request=request,
+        template_name='profiles/edit.html',
+        context={
+            'profile':data_profile,
+            'form': data_form
+        }
     )

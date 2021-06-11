@@ -1,7 +1,5 @@
 const modal = document.querySelector(".modal");
-const publications__actions = document.querySelector(
-  ".publications__actions"
-).firstElementChild;
+const publications__actions = document.querySelector(".actions__delete");
 
 publications__actions.onclick = () => {
   modal.style.visibility = "visible";

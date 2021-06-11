@@ -31,8 +31,14 @@ urlpatterns = [
         name='update'
     ),
     path(
-        route='<int:id>/',
+        route='details/<int:id>/',
         view=views.ProfileDetailView.as_view(),
         name='details'
     ),
+    path(
+        route='edit/',
+        view=views.edit_profile,
+        name='edit'
+    )
 ]
+

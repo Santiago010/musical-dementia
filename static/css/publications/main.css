@@ -33,11 +33,12 @@ body {
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .container__publication {
   margin: 1em 0.5em;
-  max-width: 500px;
+  width: 500px;
   border-radius: 1em;
   background: #e8e8e8;
   box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
@@ -113,7 +114,7 @@ body {
 }
 
 .publication__image:hover .publication__image__images--back {
-  height: 100%;
+  height: 400px;
   cursor: pointer;
 }
 
@@ -306,7 +307,8 @@ body {
   font-size: 1.2em;
 }
 
-.container__detail {
+.container__detail,
+.container__edit {
   max-width: 100%;
   min-width: 60%;
   border-radius: 1em;
@@ -314,11 +316,16 @@ body {
   box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
 }
 
-.detail__header {
+.detail__header,
+.edit__header {
   display: flex;
   min-height: 250px;
   flex-wrap: wrap;
   padding: 1em;
+}
+
+.edit__header > div {
+  flex-grow: 1;
 }
 
 .header__presentation {
@@ -328,8 +335,6 @@ body {
 }
 
 .presentation__photo {
-  width: 100px;
-  height: 100px;
   border-radius: 100%;
   border: 0.1em dashed var(--second-color-principal);
   display: flex;
@@ -337,11 +342,73 @@ body {
   justify-content: center;
 }
 
-.presentation__photo img {
+.presentation__photo--detail {
+  width: 100px;
+  height: 100px;
+}
+
+.presetation__photo--edit {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.presentation__photo--detail img {
   border-radius: 100%;
   object-fit: cover;
   width: 95px;
   height: 95px;
+}
+
+.presetation__photo--edit img {
+  border-radius: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.presentation__container-edit-photo {
+  background-color: rgba(34, 40, 49, 0.5);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition-property: height display;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.container-edit-photo__input {
+  visibility: hidden;
+  display: none;
+}
+
+.container-edit-photo__button {
+  padding: 0.3em;
+  background-color: var(--color-sure);
+  border: none;
+  border-radius: 0.3em;
+  cursor: pointer;
+}
+
+.container-edit-photo__button i {
+  font-size: 1.5em;
+  color: var(--color-dark);
+}
+
+.container-edit-photo__span {
+  font-family: var(--font-principal);
+  text-align: center;
+  color: var(--color-sure);
+  font-size: 0.8em;
+  margin-top: 0.2em;
 }
 
 .presentation__username {
@@ -351,6 +418,19 @@ body {
   letter-spacing: -1px;
   font-size: 500;
   color: var(--second-color-principal);
+}
+
+.presentation__username--edit {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  transition-property: border-bottom;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.presentation__username:hover {
+  border-bottom: 1px dashed var(--second-color-principal);
 }
 
 .detail__header > div {
@@ -380,7 +460,35 @@ body {
 }
 
 .info__list li {
-  list-style-type: circle;
+  margin: 1em 0;
+  animation: change_list_style_type 1s cubic-bezier(0.165, 0.84, 0.44, 1)
+    infinite alternate-reverse;
+}
+
+.info__list li input {
+  color: var(--second-color-principal);
+  font-family: var(--font-principal);
+  font-size: 0.9em;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  transition-property: border-bottom;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.info__list li input:hover {
+  border-bottom: 1px dashed var(--second-color-principal);
+}
+
+@keyframes change_list_style_type {
+  0% {
+    list-style-type: circle;
+  }
+
+  100% {
+    list-style-type: disc;
+  }
 }
 
 .header__info a {
@@ -401,7 +509,30 @@ body {
   text-decoration: underline;
 }
 
+.info__submit {
+  border: none;
+  outline: none;
+  align-self: flex-end;
+  text-decoration: none;
+  color: var(--color-sure);
+  background-color: var(--first-color-principal);
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  font-family: var(--font-principal);
+  text-transform: capitalize;
+  transition-property: background-color text-decoration;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: pointer;
+}
+
+.info__submit:hover {
+  background-color: var(--second-color-principal);
+  text-decoration: underline;
+}
+
 .header__description {
+  flex-basis: 100%;
   flex-grow: 1;
   text-align: center;
   font-family: var(--font-principal);
@@ -419,6 +550,25 @@ body {
 .header__description p {
   margin-top: 0.3em;
   color: var(--second-color-principal);
+}
+
+.header__description textarea {
+  width: 100%;
+  margin-top: 0.3em;
+  color: var(--second-color-principal);
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+  font-family: var(--font-principal);
+  font-size: 1em;
+  transition-property: border-bottom;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.header__description textarea:hover {
+  border-bottom: 1px dashed var(--second-color-principal);
 }
 
 .detail__body {
@@ -488,7 +638,6 @@ body {
   color: var(--color-sure);
   border-radius: 0.5em;
   padding: 0.5em 0;
-  width: 45%;
   text-align: center;
   margin: 0.5em;
   text-transform: capitalize;
@@ -501,15 +650,15 @@ body {
   background-color: var(--first-color-principal);
   color: var(--color-sure);
   border-radius: 0.5em;
-  padding: 0.5em 0;
-  width: 45%;
+  padding: 0.5em 0.5em;
+  flex-basis: 100%;
   text-align: center;
   margin: 0.5em;
   text-transform: capitalize;
   transition-property: background-color text-decoration;
   transition-duration: 0.3s;
-  /* text-decoration: none; */
   border: none;
+  cursor: pointer;
 }
 
 .actions__delete:hover {
@@ -521,7 +670,7 @@ body {
   color: var(--color-sure);
   border-radius: 0.5em;
   padding: 0.5em 0;
-  width: 45%;
+  flex-basis: 100%;
   text-align: center;
   margin: 0.5em;
   text-transform: capitalize;

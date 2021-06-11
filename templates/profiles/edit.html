@@ -1,0 +1,120 @@
+{% extends 'struct_base1.html' %} {% block head_content %}
+<title>Edit profile: @{{request.user.username}}</title>
+{% endblock head_content %} {% block body_content %}
+<form
+  action="{% url 'users:edit' %}"
+  method="post"
+  class="container"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %}
+  <input type="hidden" name="id" value="{{request.user.id}}" />
+  <div class="container__edit">
+    <div class="edit__header">
+      <div class="header__presentation">
+        <div class="presentation__photo presetation__photo--edit">
+          <img
+            src="{{profile.photo.url}}"
+            alt="foto de perfil {{profile.user.username}} anterior"
+          />
+          <div class="presentation__container-edit-photo">
+            <input
+              type="file"
+              name="photo"
+              class="container-edit-photo__input"
+              value="{{profile.photo.url}}"
+            />
+            <button type="button" class="container-edit-photo__button">
+              <i class="fas fa-camera"></i>
+            </button>
+            <span class="container-edit-photo__span">Escoge una foto</span>
+          </div>
+        </div>
+        <input
+          type="text"
+          placeholder="nombre de usuario"
+          value="{{profile.user.username}}"
+          name="username"
+          class="presentation__username presentation__username--edit"
+          required
+        />
+      </div>
+      <div class="header__info">
+        <label>Datos</label>
+        <ul class="info__list">
+          <li>
+            <input
+              type="email"
+              placeholder="correo"
+              value="{{profile.user.email}}"
+              name="email"
+              required
+            />
+          </li>
+          <li>
+            <input
+              type="number"
+              value="{{profile.phone_number}}"
+              placeholder="numero de telefono"
+              name="phone_number"
+              required
+            />
+          </li>
+          <li>
+            <input
+              type="text"
+              name="first_name"
+              value="{{profile.user.first_name}}"
+              placeholder="nombre"
+              required
+            />
+          </li>
+          <li>
+            <input
+              type="text"
+              name="last_name"
+              value="{{profile.user.last_name}}"
+              placeholder="apellido"
+              required
+            />
+          </li>
+          <li>
+            <input
+              type="password"
+              name="password"
+              placeholder="contraseña nueva"
+              required
+            />
+          </li>
+          <li>
+            <input
+              type="password"
+              name="password_confirmation"
+              placeholder="confirmacion contraseña"
+              required
+            />
+          </li>
+        </ul>
+        <div>
+          <a href=" {% url 'users:logout' %} ">Cerrar Sección</a>
+          <button
+            type="button"
+            class="actions__delete actions__delete--profile"
+          >
+            Eliminar
+          </button>
+          <input class="info__submit" type="submit" value="Guardar" />
+        </div>
+      </div>
+      <div class="header__description">
+        <label for="">Intereses Musicales</label>
+        <textarea name="interest" placeholder="intereses musicales" required>
+{{profile.interest}}</textarea
+        >
+      </div>
+    </div>
+  </div>
+</form>
+{% load static %}
+<script src="{% static 'js/edit-user-of-photo.js' %}"></script>
+{% include 'profiles/modal.html' %} {% endblock body_content %}
