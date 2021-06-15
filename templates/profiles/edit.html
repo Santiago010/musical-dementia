@@ -33,11 +33,12 @@
         <input
           type="text"
           placeholder="nombre de usuario"
-          value="{{profile.user.username}}"
+          value="{{profile.user.username.value}}"
           name="username"
-          class="presentation__username presentation__username--edit"
           required
+          class="presentation__username presentation__username--edit"
         />
+        <p  class="presetation__paragraph-errors" >{% if form.username.errors  %}{% for errors in form.username.errors %} {{errors}}{% endfor %} {% endif %}</p>
       </div>
       <div class="header__info">
         <label>Datos</label>
@@ -51,6 +52,10 @@
               required
             />
           </li>
+          <p>
+            {% if form.email.errors %}{% for errors in form.email.errors %}
+            {{errors}}{% endfor %}{% else %} {% endif %}
+          </p>
           <li>
             <input
               type="number"
@@ -59,6 +64,13 @@
               name="phone_number"
               required
             />
+            <p>
+              {% if form.phone_number.errors %}
+              {% for errors in form.phone_number.errors %}
+               {{errors}}
+              {% endfor %}
+              {% endif %}
+            </p>
           </li>
           <li>
             <input
@@ -68,6 +80,12 @@
               placeholder="nombre"
               required
             />
+            <p>
+              {% if form.first_name.errors %}{% for errors in form.first_name.errors %} 
+              {{errors}}
+              {% endfor %}
+              {% endif %}
+            </p>
           </li>
           <li>
             <input
@@ -77,6 +95,13 @@
               placeholder="apellido"
               required
             />
+            <p>
+              {% if form.last_name.errors %}
+              {% for errors in form.last_name.errors %}
+              {{errors}}
+              {% endfor %}
+              {% endif %}
+            </p>
           </li>
           <li>
             <input
@@ -85,6 +110,13 @@
               placeholder="contraseña nueva"
               required
             />
+            <p>
+              {% if form.password.errors %}
+              {% for errors in form.password.errors %}
+              {{errors}}
+              {% endfor %}
+              {% endif %}
+            </p>
           </li>
           <li>
             <input
@@ -94,6 +126,13 @@
               required
             />
           </li>
+          <p>
+            {% if form.password_confirmation.errors %}
+            {% for errors in form.password_confirmation.errors %} 
+            {{errors}}
+            {% endfor %}
+             {% endif %}
+          </p>
         </ul>
         <div>
           <a href=" {% url 'users:logout' %} ">Cerrar Sección</a>
@@ -108,9 +147,9 @@
       </div>
       <div class="header__description">
         <label for="">Intereses Musicales</label>
-        <textarea name="interest" placeholder="intereses musicales" required>
-{{profile.interest}}</textarea
+        <textarea name="interest" required placeholder="Intereses Musicales">{{profile.interest}}</textarea
         >
+        <p>{% if form.interest.errors  %}{% for errors in form.interest.errors %} {{errors}}{% endfor %}{% endif %} </p>
       </div>
     </div>
   </div>

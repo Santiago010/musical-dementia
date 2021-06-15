@@ -29,7 +29,7 @@
   display: flex;
 }
 
-.modal__buttons a {
+.modal__buttons a, .modal__buttons input {
   color: var(--color-sure);
   background-color: var(--first-color-principal);
   border-radius: 0.5em;
@@ -39,6 +39,8 @@
   margin: 0.5em;
   text-transform: capitalize;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
 }
 
 .modal__buttons button {

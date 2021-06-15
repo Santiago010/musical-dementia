@@ -39,6 +39,11 @@ urlpatterns = [
         route='edit/',
         view=views.edit_profile,
         name='edit'
+    ),
+    path(
+        route='delete/<int:id>/',
+        view=views.ProfileDeleteView.as_view(),
+        name='delete'
     )
 ]
 

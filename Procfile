@@ -1,0 +1,1 @@
+web : gunicorn musicaldemential.asgi --log-file -

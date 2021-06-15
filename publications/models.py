@@ -19,6 +19,6 @@ class Publication(models.Model):
     tag_musical_genre = models.CharField(max_length=15)
     price = models.CharField(max_length=10)
     exchange = models.BooleanField(default=False)
-    content = models.CharField(default="Contenido no especificado",max_length=100)
+    content = models.CharField(blank=True,max_length=100)
     publication_date = models.DateField(auto_now_add=True)
     availability = models.BooleanField(default=False)

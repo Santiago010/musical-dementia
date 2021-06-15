@@ -6,8 +6,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
 from django.forms import ValidationError
-from django.urls.base import reverse, reverse_lazy
-from django.views.generic import DetailView
+from django.urls.base import  reverse_lazy
+from django.views.generic import DetailView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Utilities
@@ -83,7 +83,7 @@ def signup_view(request):
             form_signup.save()
             return redirect('users:login')
         else:
-            form_signup.add_error('password',ValidationError("La contraseña de confirmacion no concide."))
+            form_signup.add_error('password_confirmation',ValidationError("La contraseña de confirmacion no concide."))
 
     else :
         form_signup = SignupForm()
@@ -125,23 +125,46 @@ def update_profile(request):
 def edit_profile(request):
     data_profile = Profile.objects.get(id=request.user.profile.id)
     if request.method == 'POST':
-        data_form = EditForm(request.POST,request.FILES)
-        if data_form.is_valid():
-            data_form.save()
-            return redirect('users:logout')
-        else:
-            print(data_form.errors)
+        try:
+            if request.POST.__getitem__('photo') == '':
+                request.POST.__init__(mutable=True)
+                request.POST.__setitem__('photo',data_profile.photo)
+                request.FILES.appendlist('photo',data_profile.photo)
+                form_edit = EditForm(request.POST,request.FILES)
+                if form_edit.is_valid():
+                    form_edit.save()
+                    return redirect("users:logout")
+                else:
+                    print(form_edit.errors)
+                    form_edit.add_error('password_confirmation',ValidationError("La contraseña de confirmacion no concide."))
 
 
-
+        except django.utils.datastructures.MultiValueDictKeyError:
+            form_edit = EditForm(request.POST,request.FILES)
+            if form_edit.is_valid():
+                    form_edit.save()
+                    return redirect("users:logout")
+            else:
+                print(form_edit.errors)
+                form_edit.add_error('password_confirmation',ValidationError("La contraseña de confirmacion no concide."))
     else:
-        data_form = EditForm()
+        form_edit = EditForm()
+        
 
+
+
+        
     return render(
         request=request,
         template_name='profiles/edit.html',
         context={
             'profile':data_profile,
-            'form': data_form
+            'form': form_edit
         }
     )
+
+class ProfileDeleteView(DeleteView):
+    slug_field = 'id'
+    slug_url_kwarg = 'id'
+    model = User
+    success_url = reverse_lazy('users:login')

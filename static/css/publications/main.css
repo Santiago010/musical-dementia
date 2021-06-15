@@ -420,6 +420,13 @@ body {
   color: var(--second-color-principal);
 }
 
+.presetation__paragraph-errors{
+  color: var(--second-color-principal);
+  font-family: var(--font-principal);
+  font-size: 0.9em;
+}
+
+
 .presentation__username--edit {
   border: none;
   background-color: transparent;
@@ -518,6 +525,7 @@ body {
   background-color: var(--first-color-principal);
   padding: 0.5em 1em;
   border-radius: 0.5em;
+  font-size: 1em;
   font-family: var(--font-principal);
   text-transform: capitalize;
   transition-property: background-color text-decoration;
@@ -652,6 +660,8 @@ body {
   border-radius: 0.5em;
   padding: 0.5em 0.5em;
   flex-basis: 100%;
+  font-size: 1em;
+
   text-align: center;
   margin: 0.5em;
   text-transform: capitalize;

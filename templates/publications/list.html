@@ -45,7 +45,7 @@
       <div>PRECIO: {{publication.price}}</div>
     </div>
     <div class="publication__content">
-      <p>Contenido: {{publication.content}}</p>
+      <p>Contenido: {% if not publication.content %}Contenido no especificado {% else %}publication.content{% endif %}</p>
     </div>
   </div>
   {% endfor %}

@@ -1,9 +1,10 @@
 <div class="modal">
-  <p>{{request.user.username}} estas seguro de eliminar tu cuenta?</p>
-  <div class="modal__buttons">
-    <a href="">Eliminar</a>
-    <button>Cancelar</button>
-  </div>
+  <p>{{request.user.username}} estas seguro de eliminar tu cuenta? </p>
+  <form class="modal__buttons" method="POST" action=" {% url 'users:delete' request.user.id %} ">
+  {% csrf_token %}
+  <input type="submit" value="Confirmar">
+  <button type="button">Cancelar</button>
+  </form>
 </div>
 {% load static %}
 <script src="{% static 'js/modal.js' %}"></script>
