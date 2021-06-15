@@ -1,1 +1,1 @@
-web : gunicorn musicaldemential.asgi --log-file -
+web : gunicorn musicaldementia.wsgi --log-file -
